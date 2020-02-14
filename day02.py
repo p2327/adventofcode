@@ -15,7 +15,7 @@ Hint: if an id contains 2s and 3s repeats it counts  towards both totals
 """
 
 
-data_folder = Path('/Users/pietro.pravettoni/developer/adventofcode/data/')
+data_folder = Path('')
 
 
 with open(data_folder / 'box_ids.txt') as f:
