@@ -113,7 +113,7 @@ def identify(ids: List[str]) -> Tuple[Tuple[str], str]:
                 equal_letters = box_id.replace(list(set(box_id).difference(id))[0], '')
                 return prototype_ids, equal_letters
             else:
-                # onto then next
+                # onto the next id
                 pass
             # reset the counter for the next id
             diff_count = 0
