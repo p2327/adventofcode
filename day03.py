@@ -1,4 +1,4 @@
-from typing import NamedTuple, Iterator, Tuple, Dict
+from typing import NamedTuple, Iterator, Tuple, Dict, List
 from collections import Counter
 import re
 
@@ -16,6 +16,7 @@ claim = '#123 @ 3,2: 5x4'
 rgx = "#([0-9]+) @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9+])"
 
 Coord = Tuple[int, int]
+
 
 class Rectangle(NamedTuple):
     id: int
@@ -35,7 +36,7 @@ class Rectangle(NamedTuple):
         id, x_lo, y_lo, width, height = [int(x) for x in re.match(rgx, claim).groups()]
         return Rectangle(id, x_lo, y_lo, x_lo + width, y_lo + height)
 
-    # gives all the coordinators
+    # gives all the coordinates
     def all_squares(self) -> Iterator[Coord]:
         for i in range(self.x_lo, self.x_hi):
             for j in range(self.y_lo, self.y_hi):
@@ -64,9 +65,9 @@ def multi_claimed(claims: List[str]) -> int:
 
 
 # unit tests
-TEST_CLAIMS =[
+TEST_CLAIMS = [
     "#1 @ 1,3: 4x4",
-    "#2 @ 3,1: 4x4", 
+    "#2 @ 3,1: 4x4",
     "#3 @ 5,5: 2x2"
 ]
 
