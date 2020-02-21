@@ -43,7 +43,10 @@ class Nap(NamedTuple):
     wake: int
 
 
+rgx = r"[([0-9]{4}"
+
 def find_naps(entries: List[str]) -> List[Nap]:
+    entries = sorted(entries)
 
 
 
