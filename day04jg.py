@@ -96,7 +96,9 @@ def sleepiest_guard(naps: List[Nap]) -> int:
 
 def most_common_sleepy_minute(naps: List[Nap], guard_id: int) -> int:
     """
-    Counts minutes as tehy appear in the 
+    Counts minutes as they appear in the Nap object.
+    Returns the most common
+    """
     minutes = Counter()
 
     for nap in naps:
@@ -104,10 +106,11 @@ def most_common_sleepy_minute(naps: List[Nap], guard_id: int) -> int:
             for minute in range(nap.sleep, nap.wake):
                 minutes[minute] += 1
 
-    [(minute1, count1), (minute2, count2)] = minutes.most_common(2)
-    assert count1 > count2 
+    #[(minute1, count1), (minute2, count2)] = minutes.most_common(2)
+    #assert count1 > count2 
+    minute1 = minutes.most_common(1)[0][0]
     return minute1
 
 assert sleepiest_guard(NAPS) == 10
-assert most_common_sleepy_minute(NAPS, guard_id=10) == 24
+print(most_common_sleepy_minute(NAPS, guard_id=10))
 
