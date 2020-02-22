@@ -3,7 +3,7 @@ from typing import NamedTuple, Tuple, List
 import re
 
 # Find guard with most minutes asleep
-# Compute (ID of guard) * (most asleep minute)
+# Compute (ID of guard) * (most asleep minute)
 
 
 TEST_LOG = """[1518-11-01 00:00] Guard #10 begins shift
@@ -48,9 +48,7 @@ guard_id_rgx = r"Guard #([0-9]+) begins shift"
 
 def find_naps(entries: List[str]) -> List[Nap]:
     naps: List[Nap] = []
-
     entries = sorted(entries)
-
     guard_id = sleep = wake = None
 
     # extract information from each log entry
@@ -75,10 +73,41 @@ def find_naps(entries: List[str]) -> List[Nap]:
         elif "wakes up" in comment:
             assert guard_id is not None and sleep is not None and wake is None
             wake = int(minute)
+            # add the entry to naps and reset sleep and wake
+            # only add after a full cycle is complete
+            # and fdata is collected for guard, sleep and wake
             naps.append(Nap(guard_id, sleep, wake))
             sleep = wake = None
 
     return naps
         
 
-print(find_naps(TEST_LOG))
+NAPS = find_naps(TEST_LOG)
+
+
+def sleepiest_guard(naps: List[Nap]) -> int:
+    sleep_counts = Counter()
+
+    for nap in naps:
+        sleep_counts[nap.guard_id] += (nap.wake - nap.sleep)
+
+    return sleep_counts.most_common(1)[0][0]
+
+
+def most_common_sleepy_minute(naps: List[Nap], guard_id: int) -> int:
+    """
+    Counts minutes as tehy appear in the 
+    minutes = Counter()
+
+    for nap in naps:
+        if nap.guard_id == guard_id:
+            for minute in range(nap.sleep, nap.wake):
+                minutes[minute] += 1
+
+    [(minute1, count1), (minute2, count2)] = minutes.most_common(2)
+    assert count1 > count2 
+    return minute1
+
+assert sleepiest_guard(NAPS) == 10
+assert most_common_sleepy_minute(NAPS, guard_id=10) == 24
+
