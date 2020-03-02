@@ -76,8 +76,8 @@ assert multi_claimed(TEST_CLAIMS == 4)
 
 
 # solution
-with open('../data/fabric.txt') as f:
+with open('C:/Python/projects/adventofcode/data/fabric.txt') as f:
     claims = [line.strip() for line in f]
 
-
-print(multi_claimed(claims))
+print(claims)
+#print(multi_claimed(claims))

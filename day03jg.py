@@ -62,11 +62,13 @@ TEST_CLAIMS = ["#1 @ 1,3: 4x4", "#2 @ 3,1: 4x4", "#3 @ 5,5: 2x2"]
 assert multi_claimed(TEST_CLAIMS) == 4
 
 
-with open('/pythonprojects/adventofcode/data/fabric.txt') as f:
+# solution
+with open('C:/Python/projects/adventofcode/data/fabric.txt') as f:
     claims = [line.strip() for line in f]
 
+print(claims)
 
-print(multi_claimed(claims))
+#print(multi_claimed(claims))
 
 
 def non_overlapping_claim(claims: List[str]) -> int:
@@ -91,7 +93,7 @@ def non_overlapping_claim(claims: List[str]) -> int:
 assert non_overlapping_claim(TEST_CLAIMS) == 3
 
 
-print(non_overlapping_claim(claims))
+#print(non_overlapping_claim(claims))
 
 
 
